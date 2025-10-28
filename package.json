@@ -1,27 +1,30 @@
 {
-  "name": "myapp",
+  "name": "copdf",
   "version": "1.0.0",
   "private": true,
+  "description": "COPDF mobile app built with Ionic + Capacitor",
   "scripts": {
     "start": "ionic serve",
     "build": "ionic build",
-    "test": "ionic test",
-    "lint": "eslint ."
+    "android": "ionic capacitor build android",
+    "ios": "ionic capacitor build ios",
+    "sync": "ionic capacitor sync"
   },
   "dependencies": {
-    "@ionic/react": "^8.0.0",
-    "@ionic/react-router": "^8.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router": "^6.18.0",
-    "react-router-dom": "^6.18.0"
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/app": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/haptics": "^6.0.0",
+    "@capacitor/keyboard": "^6.0.0",
+    "@capacitor/status-bar": "^6.0.0",
+    "@ionic/core": "^8.0.0",
+    "@ionic/pwa-elements": "^3.2.2"
   },
   "devDependencies": {
     "@capacitor/cli": "^6.0.0",
-    "@capacitor/core": "^6.0.0",
-    "typescript": "^5.0.0"
+    "@ionic/cli": "^7.2.0",
+    "typescript": "^5.4.0"
   },
-  "description": "An Ionic React App",
-  "author": "YourName",
+  "author": "COPDF",
   "license": "MIT"
 }
