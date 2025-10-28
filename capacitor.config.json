@@ -1,0 +1,22 @@
+{
+  "appId": "com.example.pdfapp",
+  "appName": "PDFApp",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 3000,
+      "launchAutoHide": true,
+      "backgroundColor": "#ffffffff",
+      "androidSplashResourceName": "splash",
+      "iosSplashResourceName": "splash",
+      "showSpinner": true,
+      "androidScaleType": "CENTER_CROP",
+      "spinnerColor": "#999999"
+    }
+  },
+  "server": {
+    "url": "",
+    "cleartext": true
+  }
+}

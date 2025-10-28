@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แปลงรูปเป็น PDF</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: "Prompt", sans-serif;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      background: #334155;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .filename-input {
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+
+    .filename-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .preview img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    button {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #2563eb;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #1d4ed8;
+    }
+
+    .progress {
+      margin-top: 10px;
+      height: 8px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      width: 0;
+      background: #38bdf8;
+      transition: width 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>📸 แปลงรูปเป็น PDF</h1>
+    <input type="file" id="imageInput" accept="image/*" multiple />
+    <input
+      type="text"
+      id="filenameInput"
+      class="filename-input"
+      placeholder="ตั้งชื่อไฟล์ PDF (ไม่ต้องใส่ .pdf)"
+    />
+    <div class="preview" id="preview"></div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <button id="generateBtn">แปลงเป็น PDF และดาวน์โหลด</button>
+  </div>
+
+  <script>
+    const { jsPDF } = window.jspdf;
+    const input = document.getElementById("imageInput");
+    const preview = document.getElementById("preview");
+    const bar = document.getElementById("bar");
+    const button = document.getElementById("generateBtn");
+    const filenameInput = document.getElementById("filenameInput");
+
+    let images = [];
+
+    input.addEventListener("change", (e) => {
+      images = Array.from(e.target.files);
+      preview.innerHTML = "";
+      images.forEach((file) => {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        preview.appendChild(img);
+      });
+    });
+
+    button.addEventListener("click", async () => {
+      if (images.length === 0) return alert("กรุณาเลือกรูปก่อนครับ!");
+
+      let filename = filenameInput.value.trim();
+      if (!filename) filename = "images"; // ชื่อเริ่มต้น
+
+      button.disabled = true;
+      bar.style.width = "0%";
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      for (let i = 0; i < images.length; i++) {
+        const file = images[i];
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
+        await new Promise((res) => (img.onload = res));
+
+        const width = pdf.internal.pageSize.getWidth();
+        const height = (img.height * width) / img.width;
+        pdf.addImage(img, "JPEG", 0, 0, width, height);
+
+        bar.style.width = ((i + 1) / images.length) * 100 + "%";
+        if (i < images.length - 1) pdf.addPage();
+      }
+
+      pdf.save(`${filename}.pdf`);
+      button.disabled = false;
+      bar.style.width = "0%";
+    });
+  </script>
+</body>
+</html>
