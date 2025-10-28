@@ -1,6 +1,6 @@
 {
   "appId": "com.example.pdfapp",
-  "appName": "PDFApp",
+  "appName": "PDFAPP",
   "webDir": "www",
   "bundledWebRuntime": false,
   "plugins": {
@@ -20,3 +20,4 @@
     "cleartext": true
   }
 }
+
