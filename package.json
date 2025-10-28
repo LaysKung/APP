@@ -1,5 +1,5 @@
 {
-  "name": "copdf",
+  "name": "PDFapp",
   "version": "1.0.0",
   "private": true,
   "description": "COPDF mobile app built with Ionic + Capacitor",
@@ -28,3 +28,4 @@
   "author": "COPDF",
   "license": "MIT"
 }
+
