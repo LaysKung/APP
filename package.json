@@ -5,7 +5,7 @@
   "description": "COPDF mobile app built with Ionic + Capacitor",
   "scripts": {
     "start": "ionic serve",
-    "build": "ionic build",
+    "build": "npx cap sync"
     "android": "ionic capacitor build android",
     "ios": "ionic capacitor build ios",
     "sync": "ionic capacitor sync"
@@ -28,6 +28,7 @@
   "author": "PDFAPP",
   "license": "MIT"
 }
+
 
 
 
