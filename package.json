@@ -2,33 +2,15 @@
   "name": "pdfapp",
   "version": "1.0.0",
   "private": true,
-  "description": "COPDF mobile app built with Ionic + Capacitor",
   "scripts": {
-    "start": "ionic serve",
-    "build": "npx cap sync"
-    "android": "ionic capacitor build android",
-    "ios": "ionic capacitor build ios",
-    "sync": "ionic capacitor sync"
+    "build": "npx cap sync",
+    "android": "npx cap open android",
+    "ios": "npx cap open ios",
+    "start": "npx cap serve"
   },
   "dependencies": {
-    "@capacitor/android": "^6.0.0",
-    "@capacitor/app": "^6.0.0",
-    "@capacitor/core": "^6.0.0",
-    "@capacitor/haptics": "^6.0.0",
-    "@capacitor/keyboard": "^6.0.0",
-    "@capacitor/status-bar": "^6.0.0",
-    "@ionic/core": "^8.0.0",
-    "@ionic/pwa-elements": "^3.2.2"
-  },
-  "devDependencies": {
-    "@capacitor/cli": "^6.0.0",
-    "@ionic/cli": "^7.2.0",
-    "typescript": "^5.4.0"
-  },
-  "author": "PDFAPP",
-  "license": "MIT"
+    "@capacitor/android": "^6.1.0",
+    "@capacitor/core": "^6.1.0",
+    "@capacitor/cli": "^6.1.0"
+  }
 }
-
-
-
-
